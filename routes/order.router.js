@@ -1,6 +1,7 @@
 import express from "express";
 import { Order } from "../model/order.model.js";
 import {
+  DeleteAll,
   createorder,
   deleteOrderItem,
   getAllorder,
@@ -20,3 +21,4 @@ router.post("/add", createorder);
 router.patch("/:id", CheckAdmin, updatestatus); // done
 export default router;
 router.delete("/:id", deleteOrderItem); //done
+router.post("/deleteAll", CheckAdmin, DeleteAll);

@@ -70,3 +70,17 @@ export const deleteOrderItem = async (req, res) => {
     res.status(500).json({ message: "error" });
   }
 };
+
+export const DeleteAll = async (req, res) => {
+  const email = req.query.email;
+  try {
+    const resp = await Order.find({ email: email });
+    const itemid = await resp.map((id) => new ObjectId(id));
+    const deleteOrderreq = await Order.deleteMany({ _id: { $in: itemid } });
+    res
+      .status(200)
+      .json({ deleteOrderreq, message: "orders  deletd Successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: error });
+  }
+};
